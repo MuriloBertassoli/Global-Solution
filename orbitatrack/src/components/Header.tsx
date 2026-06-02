@@ -27,8 +27,17 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           
-          {/* Logo com o novo Símbolo e Texto Bicolor */}
-          <div className="flex-shrink-0">
+          {/* Esquerda: Ícone hambúrguer */}
+          <div className="flex-1 flex justify-start">
+            <button className="text-slate-300 hover:text-white p-2 -ml-2 rounded-md hover:bg-slate-800 transition-colors focus:outline-none">
+              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Centro: Logo com o novo Símbolo e Texto Bicolor */}
+          <div className="flex-shrink-0 flex justify-center">
             <Link to="/" className="flex items-center gap-3 group">
               <OrbitaIcon />
               <div className="text-xl font-bold tracking-wide group-hover:opacity-80 transition-opacity">
@@ -38,32 +47,11 @@ const Header = () => {
             </Link>
           </div>
 
-          {/* Menu desktop */}
-          <nav className="hidden md:flex space-x-8">
-            <Link to="/" className="text-slate-300 hover:text-white transition-colors font-medium text-sm">
-              Início
-            </Link>
-            <Link to="/missoes" className="text-slate-300 hover:text-white transition-colors font-medium text-sm">
-              Missões
-            </Link>
-          </nav>
-
-          {/* Botão ação e ícone do menu hambúrguer */}
-          <div className="flex items-center gap-4">
-            <div className="hidden md:block">
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-full text-xs font-semibold transition-colors tracking-wide">
-                ENTRAR
-              </button>
-            </div>
-
-            {/* Ícone hambúrguer */}
-            <div className="md:hidden"> 
-              <button className="text-slate-300 hover:text-white p-2 rounded-md hover:bg-slate-800 transition-colors focus:outline-none">
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              </button>
-            </div>
+          {/* Direita: Botão ação */}
+          <div className="flex-1 flex justify-end">
+            <button className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-full text-xs font-semibold transition-colors tracking-wide">
+              ENTRAR
+            </button>
           </div>
 
         </div>
