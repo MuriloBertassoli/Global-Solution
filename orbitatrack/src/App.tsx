@@ -2,7 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
-import Sobre from './pages/Sobre'; 
+import Sobre from './pages/Sobre';
+import Integrantes from './pages/Integrantes'; 
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/sobre" element={<Sobre />} /> 
+            <Route path="/sobre" element={<Sobre />} />
+            <Route path="/integrantes" element={<Integrantes />} /> 
           </Routes>
         </main>
 
