@@ -28,8 +28,8 @@ const Integrantes = () => {
       turma: "1TDSPA",
       foto: fotoMurilo, 
       desenvolveu: "Front-End Design Engineering (React & Tailwind)",
-      github: "https://github.com/seugithub",
-      linkedin: "https://linkedin.com/in/seulinkedin"
+      github: "https://github.com/MuriloBertassoli",
+      linkedin: "https://www.linkedin.com/in/murilomassini"
     },
     {
       id: 2,
@@ -76,8 +76,8 @@ const Integrantes = () => {
       turma: "1TDSPA",
       foto: fotoGabriel,
       desenvolveu: "Software Engineering & Python",
-      github: "#",
-      linkedin: "#"
+      github: "https://github.com/GabrielDeottiZanatta",
+      linkedin: "https://www.linkedin.com/in/gabriel-deotti-zanatta-42750735b/"
     }
   ];
 

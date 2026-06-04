@@ -3,7 +3,8 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Sobre from './pages/Sobre';
-import Integrantes from './pages/Integrantes'; 
+import Integrantes from './pages/Integrantes';
+import Faq from './pages/Faq'; // <-- NOVO IMPORT
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/sobre" element={<Sobre />} />
-            <Route path="/integrantes" element={<Integrantes />} /> 
+            <Route path="/integrantes" element={<Integrantes />} />
+            <Route path="/faq" element={<Faq />} /> {/* <-- NOVA ROTA */}
           </Routes>
         </main>
 
