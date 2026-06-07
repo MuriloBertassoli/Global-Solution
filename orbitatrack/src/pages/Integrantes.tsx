@@ -115,7 +115,7 @@ const Integrantes = () => {
         <span className="text-sm text-slate-300 font-medium">{membro.desenvolveu}</span>
       </div>
 
-      {/* 5. Link github e linkedin */}
+      {/*Link github e linkedin */}
       <div className="flex gap-8 mt-auto pt-5 border-t border-slate-800/60 w-full justify-center">
         <a href={membro.github} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-transform hover:scale-110" title="GitHub">
           <GithubIcon />

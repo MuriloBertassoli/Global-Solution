@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-// 🚀 Componente do Ícone Personalizado
+// Componente do Ícone Personalizado
 const OrbitaIcon = () => (
   <div className="relative flex items-center justify-center h-9 w-9">
     <div className="absolute inset-0 bg-blue-600 rounded-full opacity-40 blur-[1px]"></div>
@@ -66,9 +66,9 @@ const Header = () => {
 
             {/* Direita: Botão ação */}
             <div className="flex-1 flex justify-end">
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-full text-xs font-semibold transition-colors tracking-wide">
+              <Link to="/login" className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-full text-xs font-semibold transition-colors tracking-wide">
                 ENTRAR
-              </button>
+              </Link>
             </div>
 
           </div>
@@ -85,13 +85,13 @@ const Header = () => {
         ></div>
       )}
 
-      {/* O Menu em si */}
+      {/* O menu em si */}
       <div 
         className={`fixed top-0 left-0 h-full w-72 bg-[#0a0f1c] border-r border-slate-800 z-50 transform transition-transform duration-300 ease-in-out flex flex-col ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        {/* Cabeçalho do Menu */}
+        {/* Cabeçalho do menu */}
         <div className="flex items-center justify-between h-16 px-6 border-b border-slate-800/50">
           <span className="text-xs font-bold text-slate-400 tracking-[0.2em] uppercase">Navegação</span>
           <button onClick={closeSidebar} className="text-slate-400 hover:text-white p-1">
@@ -102,7 +102,7 @@ const Header = () => {
         {/* Lista de Links (Scrollable) */}
         <div className="flex-1 overflow-y-auto py-6 px-4 space-y-8">
           
-          {/* Seção 1: Páginas obrigatórias FIAP */}
+          {/* Seção 1: Páginas obrigatorias  */}
           <div>
             <ul className="space-y-1">
               <li>
@@ -132,7 +132,7 @@ const Header = () => {
             </ul>
           </div>
 
-          {/* Seção 2: Aplicação e solução */}
+          {/* Seção 2: Aplicação e soluçao */}
           <div>
             <div className="px-3 mb-2">
               <span className="text-[10px] font-bold text-slate-500 tracking-[0.2em] uppercase">Explorar</span>
