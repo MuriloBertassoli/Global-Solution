@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 // Mock data expandido
 const MISSOES_MOCK = [
@@ -93,7 +93,11 @@ const Missoes = () => {
         {/* Grid de missões */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {missoesFiltradas.map(missao => (
-            <div key={missao.id} className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 hover:border-blue-500/40 transition-all group cursor-pointer shadow-lg">
+            <Link 
+              to={`/missoes/${missao.id}`} 
+              key={missao.id} 
+              className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 hover:border-blue-500/40 transition-all group cursor-pointer shadow-lg block"
+            >
               <div className="flex justify-between items-start mb-4">
                 <span className={`text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider ${
                   missao.agencia === 'SpaceX' ? 'bg-slate-200 text-black' :
@@ -129,7 +133,7 @@ const Missoes = () => {
                   ></div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 

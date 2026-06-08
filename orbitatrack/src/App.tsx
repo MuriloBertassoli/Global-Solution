@@ -7,6 +7,7 @@ import Integrantes from './pages/Integrantes';
 import Faq from './pages/Faq';
 import Login from './pages/Login'; 
 import Missoes from './pages/Missoes';
+import DetalhesMissao from './pages/DetalhesMissao';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/faq" element={<Faq />} />
             <Route path="/login" element={<Login />} /> 
             <Route path="/missoes" element={<Missoes />} />
+            <Route path="/missoes/:id" element={<DetalhesMissao />} />
           </Routes>
         </main>
 
