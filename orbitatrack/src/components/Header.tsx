@@ -153,7 +153,7 @@ const Header = () => {
             </ul>
           </div>
 
-          {/* Seção 3: Agências */}
+          {/* SEÇÃO 3: AGÊNCIAS */}
           <div>
             <div className="px-3 mb-2">
               <span className="text-[10px] font-bold text-slate-500 tracking-[0.2em] uppercase">Agências</span>
@@ -166,13 +166,18 @@ const Header = () => {
                 { name: 'Roscosmos', color: 'bg-orange-500' }
               ].map(agencia => (
                 <li key={agencia.name}>
-                  <a href="#" className="flex items-center gap-4 px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/50 transition-colors">
+                  {/*Substituí a tag 'a' pelo 'Link' com a url formatada */}
+                  <Link 
+                    to={`/missoes?agencia=${agencia.name}`} 
+                    onClick={closeSidebar}
+                    className="flex items-center gap-4 px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/50 transition-colors"
+                  >
                     <div className="flex items-center gap-2">
                       <span className={`w-1.5 h-1.5 rounded-full ${agencia.color}`}></span>
                       <svg className="w-3.5 h-3.5 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg>
                     </div>
                     <span className="text-sm font-medium">{agencia.name}</span>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

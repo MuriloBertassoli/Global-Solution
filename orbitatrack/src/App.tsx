@@ -6,6 +6,7 @@ import Sobre from './pages/Sobre';
 import Integrantes from './pages/Integrantes';
 import Faq from './pages/Faq';
 import Login from './pages/Login'; 
+import Missoes from './pages/Missoes';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/integrantes" element={<Integrantes />} />
             <Route path="/faq" element={<Faq />} />
             <Route path="/login" element={<Login />} /> 
+            <Route path="/missoes" element={<Missoes />} />
           </Routes>
         </main>
 
