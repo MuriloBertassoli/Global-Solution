@@ -7,8 +7,8 @@ const Faq = () => {
   // Lista de perguntas e respostas 
   const faqs = [
     {
-      pergunta: "O que é a OrbitaTrack?",
-      resposta: "A OrbitaTrack é uma plataforma unificada que centraliza dados históricos e preditivos sobre missões espaciais de diversas agências globais, como NASA, SpaceX e ESA. Nosso objetivo é democratizar o acesso à informação da economia espacial."
+      pergunta: "O que é o Cosmohub?",
+      resposta: "O Cosmohub é uma plataforma unificada que centraliza dados históricos e preditivos sobre missões espaciais de diversas agências globais, como NASA, SpaceX e ESA. Nosso objetivo é democratizar o acesso à informação da economia espacial."
     },
     {
       pergunta: "Como a Inteligência Artificial é utilizada no sistema?",
@@ -24,7 +24,7 @@ const Faq = () => {
     },
     {
       pergunta: "Como o projeto se conecta com os Objetivos da ONU (ODS)?",
-      resposta: "A OrbitaTrack apoia diretamente os ODS 9 (Inovação e Infraestrutura) e ODS 13 (Ação Climática). Ao consolidar dados de satélites e missões, fornecemos uma base analítica para pesquisas focadas em monitoramento ambiental e mitigação de mudanças climáticas na Terra."
+      resposta: "O Cosmohub apoia diretamente os ODS 9 (Inovação e Infraestrutura) e ODS 13 (Ação Climática). Ao consolidar dados de satélites e missões, fornecemos uma base analítica para pesquisas focadas em monitoramento ambiental e mitigação de mudanças climáticas na Terra."
     }
   ];
 

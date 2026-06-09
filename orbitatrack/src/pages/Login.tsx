@@ -62,7 +62,7 @@ const Login = () => {
             {isRegister ? 'Criar Nova Conta' : 'Acesso Restrito'}
           </h2>
           <p className="mt-2 text-sm text-slate-400">
-            {isRegister ? 'Cadastre-se na plataforma OrbitaTrack' : 'Painel de controle OrbitaTrack'}
+            {isRegister ? 'Cadastre-se na plataforma Cosmohub' : 'Painel de controle Cosmohub'}
           </p>
         </div>
 
@@ -97,7 +97,7 @@ const Login = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full bg-slate-950/50 border border-slate-700 text-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
-                placeholder="operador@orbitatrack.com"
+                placeholder="operador@cosmohub.com"
               />
             </div>
             

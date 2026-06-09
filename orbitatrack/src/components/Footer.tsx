@@ -5,10 +5,10 @@ const Footer = () => {
         
         {/* Direitos Autorais */}
         <div className="text-slate-400 text-sm">
-          &copy; {new Date().getFullYear()} OrbitaTrack. Todos os direitos reservados.
+          &copy; {new Date().getFullYear()} Cosmohub. Todos os direitos reservados.
         </div>
 
-        {/* Links Secundários */}
+        {/* Links secundários */}
         <div className="flex gap-6 text-sm text-slate-400">
           <span className="hover:text-blue-400 cursor-pointer transition-colors">
             Termos de Uso

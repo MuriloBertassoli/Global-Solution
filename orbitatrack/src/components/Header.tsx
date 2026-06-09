@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-// Componente do Ícone Personalizado
+// Componente do Ícone personalizado
 const OrbitaIcon = () => (
   <div className="relative flex items-center justify-center h-9 w-9">
     <div className="absolute inset-0 bg-blue-600 rounded-full opacity-40 blur-[1px]"></div>
@@ -53,13 +53,13 @@ const Header = () => {
               </button>
             </div>
 
-            {/* Centro: Logo */}
+            {/* Centro: logo */}
             <div className="flex-shrink-0 flex justify-center">
               <Link to="/" className="flex items-center gap-3 group" onClick={closeSidebar}>
                 <OrbitaIcon />
                 <div className="text-xl font-bold tracking-wide group-hover:opacity-80 transition-opacity">
-                  <span className="text-white">Orbita</span>
-                  <span className="text-blue-500">Track</span>
+                  <span className="text-white">Cosmo</span>
+                  <span className="text-blue-500">Hub</span>
                 </div>
               </Link>
             </div>

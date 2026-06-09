@@ -135,7 +135,7 @@ const Integrantes = () => {
         {/* Cabeçalho da página */}
         <div className="text-center mb-16">
           <span className="text-blue-500 font-bold tracking-widest text-xs uppercase mb-3 block">Engenharia de Software</span>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">Tripulação OrbitaTrack</h1>
+          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">Tripulação Cosmohub</h1>
           <p className="text-slate-400 max-w-2xl mx-auto">
             Conheça os desenvolvedores por trás da plataforma que está mapeando a nova fronteira da economia espacial.
           </p>

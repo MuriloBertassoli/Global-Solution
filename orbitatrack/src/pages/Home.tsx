@@ -1,21 +1,22 @@
 import { Link } from 'react-router-dom';
 import bgImage from '../assets/cosmos gs.jpg';
 
-// Ícones simples em SVG para as agências 
-const AgencyIcon = () => (
-  <svg className="w-12 h-12 text-slate-600 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-  </svg>
-);
-
 const Home = () => {
+  // Array com os dados das agências para gerar os botões com logos
+  const agencias = [
+    { name: 'NASA', logo: '/logos/nasa.jpg' },
+    { name: 'SpaceX', logo: '/logos/spacex.png' },
+    { name: 'ESA', logo: '/logos/esa.jpg' },
+    { name: 'Roscosmos', logo: '/logos/roscosmos.png' }
+  ];
+
   return (
     <div className="flex flex-col w-full bg-slate-950 text-slate-200">
       
       {/* 1. HERO SECTION */}
       <section className="relative w-full min-h-[calc(100vh-4rem)] flex items-center overflow-hidden border-b border-slate-800/50">
         
-        {/*Imagem de Fundo com Overlay Gradiente */}
+        {/*Imagem de fundo com overlay */}
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat transform scale-105 animate-subtle-zoom"
           style={{ backgroundImage: `url(${bgImage})` }}
@@ -35,7 +36,7 @@ const Home = () => {
           </h1>
 
           <p className="text-lg md:text-xl text-slate-300 max-w-2xl mb-10 leading-relaxed">
-            OrbitaTrack centraliza lançamentos, programas e descobertas da NASA, SpaceX, ESA e Roscosmos — centenas de missões ao longo de décadas, tudo em um único painel de controle.
+            O Cosmohub centraliza lançamentos, programas e descobertas da NASA, SpaceX, ESA e Roscosmos — centenas de missões ao longo de décadas, tudo em um único painel de controle.
           </p>
 
           <div className="flex flex-wrap items-center gap-4 mb-16">
@@ -43,7 +44,11 @@ const Home = () => {
               Explorar Missões
               <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
             </Link>
-            <button className="bg-slate-800/80 hover:bg-slate-700 text-white px-7 py-3.5 rounded-full font-semibold backdrop-blur-sm border border-slate-700 transition-colors">
+            
+            <button 
+              onClick={() => alert("🚀 Módulo de Notícias em Tempo Real entrará no ar na Fase 2 do Cosmohub! Fique ligado.")}
+              className="bg-slate-800/80 hover:bg-slate-700 text-white px-7 py-3.5 rounded-full font-semibold backdrop-blur-sm border border-slate-700 transition-colors cursor-pointer"
+            >
               Últimas Notícias
             </button>
           </div>
@@ -71,24 +76,37 @@ const Home = () => {
         </div>
       </section>
 
-      {/* 2. SEÇÃO AGÊNCIAS  */}
+      {/* 2. SEÇÃO AGÊNCIAS */}
       <section className="py-20 bg-slate-950 border-b border-slate-800/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center text-sm font-semibold text-slate-500 tracking-widest uppercase mb-12">
-            DADOS CONSOLIDADOS DAS PRINCIPAIS AGÊNCIAS
+            EXPLORE POR OPERADOR PRINCIPAL
           </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center opacity-70">
-            {['NASA', 'SpaceX', 'ESA', 'Roscosmos'].map(agencia => (
-              <div key={agencia} className="flex flex-col items-center group hover:opacity-100 transition-opacity">
-                <AgencyIcon />
-                <span className="text-lg font-bold text-slate-400 group-hover:text-white transition-colors">{agencia}</span>
-              </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center">
+            {agencias.map(agencia => (
+              <Link 
+                key={agencia.name} 
+                to={`/missoes?agencia=${agencia.name}`}
+                className="flex flex-col items-center group transition-all hover:-translate-y-2"
+              >
+                {/* Círculo do logo */}
+                <div className="w-24 h-24 mb-4 rounded-full bg-slate-900/80 border-2 border-slate-800 group-hover:border-blue-500 flex items-center justify-center overflow-hidden shadow-lg transition-colors p-4">
+                  <img 
+                    src={agencia.logo} 
+                    alt={`Logo ${agencia.name}`} 
+                    className="w-full h-full object-contain opacity-70 group-hover:opacity-100 transition-opacity" 
+                  />
+                </div>
+                <span className="text-lg font-bold text-slate-400 group-hover:text-blue-400 transition-colors">
+                  {agencia.name}
+                </span>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 3. SEÇÃO COMO FUNCIONA / RECURSOS */}
+      {/* 3. Secao como funciona e funcões */}
       <section className="py-24 md:py-32 bg-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-16 items-center">
           
@@ -97,7 +115,7 @@ const Home = () => {
               Uma plataforma inteligente para a Economia Espacial.
             </h2>
             <p className="text-lg text-slate-300 mb-10 leading-relaxed">
-              A OrbitaTrack não apenas lista missões, ela utiliza Inteligência Artificial para analisar dados históricos do Kaggle, prevendo taxas de sucesso e agrupando lançamentos por perfil tecnológico. Centralize seu conhecimento e explore o cosmos com dados concretos.
+              O Cosmohub não apenas lista missões, ele utiliza Inteligência Artificial para analisar dados históricos do Kaggle, prevendo taxas de sucesso e agrupando lançamentos por perfil tecnológico. Centralize seu conhecimento e explore o cosmos com dados concretos.
             </p>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">

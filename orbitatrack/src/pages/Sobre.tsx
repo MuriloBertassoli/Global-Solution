@@ -32,7 +32,7 @@ const Sobre = () => {
             Decodificando a Nova Fronteira Econômica
           </h1>
           <p className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            A OrbitaTrack nasceu com o propósito de responder ao desafio proposto pela FIAP: conectar a infraestrutura do ecossistema espacial com soluções tangíveis, inteligentes e aplicáveis aqui na Terra.
+            O Cosmohub nasceu com o propósito de responder ao desafio proposto pela FIAP: conectar a infraestrutura do ecossistema espacial com soluções tangíveis, inteligentes e aplicáveis aqui na Terra.
           </p>
         </div>
       </section>
