@@ -1,45 +1,72 @@
 import { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
-// Mock data expandido
+/* // MOCK DATA MANTIDO AQUI PARA REFERÊNCIA CASO O SERVIDOR CAIA 
 const MISSOES_MOCK = [
   { id: 1, nome: "Artemis I", agencia: "NASA", status: "Sucesso", data: "2022-11-16", foguete: "SLS Block 1", chance: 100 },
-  { id: 2, nome: "Starlink G6-4", agencia: "SpaceX", status: "Sucesso", data: "2024-03-15", foguete: "Falcon 9", chance: 98 },
-  { id: 3, nome: "Luna 25", agencia: "Roscosmos", status: "Falha", data: "2023-08-11", foguete: "Soyuz-2.1b", chance: 45 },
-  { id: 4, nome: "Juice", agencia: "ESA", status: "Em curso", data: "2023-04-14", foguete: "Ariane 5", chance: 92 },
-  { id: 5, nome: "Crew-8", agencia: "SpaceX", status: "Sucesso", data: "2024-03-04", foguete: "Falcon 9", chance: 99 },
-  { id: 6, nome: "Psyche", agencia: "NASA", status: "Em curso", data: "2023-10-13", foguete: "Falcon Heavy", chance: 88 },
-  { id: 7, nome: "Perseverance", agencia: "NASA", status: "Sucesso", data: "2020-07-30", foguete: "Atlas V", chance: 95 },
-  { id: 8, nome: "Starship IFT-3", agencia: "SpaceX", status: "Parcial", data: "2024-03-14", foguete: "Starship", chance: 60 },
-  { id: 9, nome: "Euclid", agencia: "ESA", status: "Sucesso", data: "2023-07-01", foguete: "Falcon 9", chance: 94 },
-  { id: 10, nome: "Soyuz MS-24", agencia: "Roscosmos", status: "Sucesso", data: "2023-09-15", foguete: "Soyuz-2.1a", chance: 97 },
-  { id: 11, nome: "James Webb", agencia: "NASA", status: "Sucesso", data: "2021-12-25", foguete: "Ariane 5", chance: 91 },
-  { id: 12, nome: "Rosetta", agencia: "ESA", status: "Sucesso", data: "2004-03-02", foguete: "Ariane 5G+", chance: 85 },
-  { id: 13, nome: "Inspiration4", agencia: "SpaceX", status: "Sucesso", data: "2021-09-16", foguete: "Falcon 9", chance: 96 },
-  { id: 14, nome: "Phobos-Grunt", agencia: "Roscosmos", status: "Falha", data: "2011-11-08", foguete: "Zenit-2FG", chance: 30 },
-  { id: 15, nome: "Europa Clipper", agencia: "NASA", status: "Em curso", data: "2024-10-10", foguete: "Falcon Heavy", chance: 89 }
+  // ...
 ];
+*/
+
+// Define o formato da missão que esperamos receber do Java
+interface Missao {
+  id: number;
+  nome: string;
+  agencia: string;
+  status: string;
+  data: string; // ou Date, dependendo de como o Java envia
+  foguete: string;
+  chance: number;
+}
 
 const Missoes = () => {
-  //Lendo os parâmetros da url
   const [searchParams, setSearchParams] = useSearchParams();
   const agenciaNaUrl = searchParams.get('agencia') || 'Todas';
 
-  // O estado inicial do filtro agora vem da url
   const [filtroAgencia, setFiltroAgencia] = useState(agenciaNaUrl);
   const [busca, setBusca] = useState('');
+  
+  // ESTADOS PARA A INTEGRAÇÃO COM O BACK-END
+  const [missoes, setMissoes] = useState<Missao[]>([]); // Inicialmente um array vazio
+  const [isLoading, setIsLoading] = useState(true); // Controla o "Carregando..."
+  const [erroConsulta, setErroConsulta] = useState('');
 
-  // Efeito: Se a url mudar lá em cima (pelo menu), atualizamos o select aqui embaixo
+  // EFEITO 1: Atualiza o filtro se a URL mudar
   useEffect(() => {
     setFiltroAgencia(searchParams.get('agencia') || 'Todas');
   }, [searchParams]);
+
+  // EFEITO 2: Busca os dados na API do Java (Render) quando a página carrega
+  useEffect(() => {
+    const buscarMissoesDoBackend = async () => {
+      try {
+        setIsLoading(true);
+        // COLOQUE AQUI A ROTA EXATA QUE SEU AMIGO CRIOU PARA LISTAR AS MISSÕES
+        const resposta = await fetch('https://projeto-espacial-6.onrender.com/missoes'); 
+        
+        if (!resposta.ok) {
+           throw new Error('Falha ao obter os dados do servidor espacial.');
+        }
+
+        const dadosDoJava = await resposta.json();
+        setMissoes(dadosDoJava); // Coloca os dados que vieram da nuvem no nosso estado
+        setErroConsulta('');
+      } catch (error) {
+        console.error("Erro na API:", error);
+        setErroConsulta('Não foi possível conectar à base de dados. O servidor pode estar hibernando (aguarde um momento e recarregue) ou o link da API está incorreto.');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    buscarMissoesDoBackend();
+  }, []); // O array vazio [] garante que isso rode apenas UMA VEZ ao entrar na página
 
   // Função para quando o usuário trocar a agência direto no select da página
   const handleTrocarAgencia = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const novaAgencia = e.target.value;
     setFiltroAgencia(novaAgencia);
     
-    // Atualiza a URL para refletir a nova agência escolhida
     if (novaAgencia === 'Todas') {
       searchParams.delete('agencia');
       setSearchParams(searchParams);
@@ -48,8 +75,8 @@ const Missoes = () => {
     }
   };
 
-  // Lógica de filtro
-  const missoesFiltradas = MISSOES_MOCK.filter(missao => {
+  // Lógica de filtro (AGORA USANDO O ESTADO 'missoes' QUE VEIO DA API)
+  const missoesFiltradas = missoes.filter(missao => {
     const bateAgencia = filtroAgencia === 'Todas' || missao.agencia === filtroAgencia;
     const bateBusca = missao.nome.toLowerCase().includes(busca.toLowerCase()) || 
                      missao.foguete.toLowerCase().includes(busca.toLowerCase());
@@ -90,57 +117,75 @@ const Missoes = () => {
           </div>
         </div>
 
-        {/* Grid de missões */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {missoesFiltradas.map(missao => (
-            <Link 
-              to={`/missoes/${missao.id}`} 
-              key={missao.id} 
-              className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 hover:border-blue-500/40 transition-all group cursor-pointer shadow-lg block"
-            >
-              <div className="flex justify-between items-start mb-4">
-                <span className={`text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider ${
-                  missao.agencia === 'SpaceX' ? 'bg-slate-200 text-black' :
-                  missao.agencia === 'NASA' ? 'bg-red-600 text-white' :
-                  missao.agencia === 'ESA' ? 'bg-blue-600 text-white' : 'bg-orange-600 text-white'
-                }`}>
-                  {missao.agencia}
-                </span>
-                <span className={`text-xs font-bold ${
-                  missao.status === 'Sucesso' ? 'text-emerald-400' :
-                  missao.status === 'Falha' ? 'text-red-400' : 
-                  missao.status === 'Parcial' ? 'text-yellow-400' : 'text-blue-400'
-                }`}>
-                  ● {missao.status}
-                </span>
-              </div>
-
-              <h3 className="text-xl font-bold text-white mb-1 group-hover:text-blue-400 transition-colors">{missao.nome}</h3>
-              <p className="text-slate-400 text-sm mb-4">{missao.foguete} • {new Date(missao.data).toLocaleDateString('pt-BR')}</p>
-
-              {/* Área do kaggle */}
-              <div className="mt-6 pt-4 border-t border-slate-800/50">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Chance de Sucesso (IA)</span>
-                  <span className="text-sm font-mono font-bold text-blue-400">{missao.chance}%</span>
-                </div>
-                <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
-                  <div 
-                    className={`h-full transition-all duration-1000 ${
-                      missao.chance > 80 ? 'bg-blue-500' : missao.chance > 50 ? 'bg-yellow-500' : 'bg-red-500'
-                    }`}
-                    style={{ width: `${missao.chance}%` }}
-                  ></div>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        {/* Mensagem caso não encontre nada */}
-        {missoesFiltradas.length === 0 && (
+        {/* FEEDBACK VISUAL PARA O USUÁRIO ENQUANTO O RENDER "ACORDA" OU SE DER ERRO */}
+        {isLoading && (
           <div className="text-center py-20">
-            <p className="text-slate-500 italic">Nenhuma missão encontrada com esses filtros.</p>
+            <svg className="animate-spin h-10 w-10 text-blue-500 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+            <p className="text-slate-400 font-medium">Estabelecendo link com o servidor (Render)...</p>
+            <p className="text-slate-500 text-xs mt-2">Isso pode levar até 50 segundos caso o servidor esteja hibernando.</p>
+          </div>
+        )}
+
+        {erroConsulta && !isLoading && (
+           <div className="bg-red-900/20 border border-red-500/30 p-6 rounded-2xl text-center mb-8">
+             <p className="text-red-400 font-bold">{erroConsulta}</p>
+           </div>
+        )}
+
+        {/* Grid de missões */}
+        {!isLoading && !erroConsulta && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {missoesFiltradas.map(missao => (
+              <Link 
+                to={`/missoes/${missao.id}`} 
+                key={missao.id} 
+                className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 hover:border-blue-500/40 transition-all group cursor-pointer shadow-lg block"
+              >
+                <div className="flex justify-between items-start mb-4">
+                  <span className={`text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider ${
+                    missao.agencia === 'SpaceX' ? 'bg-slate-200 text-black' :
+                    missao.agencia === 'NASA' ? 'bg-red-600 text-white' :
+                    missao.agencia === 'ESA' ? 'bg-blue-600 text-white' : 'bg-orange-600 text-white'
+                  }`}>
+                    {missao.agencia}
+                  </span>
+                  <span className={`text-xs font-bold ${
+                    missao.status === 'Sucesso' ? 'text-emerald-400' :
+                    missao.status === 'Falha' ? 'text-red-400' : 
+                    missao.status === 'Parcial' ? 'text-yellow-400' : 'text-blue-400'
+                  }`}>
+                    ● {missao.status}
+                  </span>
+                </div>
+
+                <h3 className="text-xl font-bold text-white mb-1 group-hover:text-blue-400 transition-colors">{missao.nome}</h3>
+                {/* Ajuste simples caso a data venha nula do banco */}
+                <p className="text-slate-400 text-sm mb-4">{missao.foguete} • {missao.data ? new Date(missao.data).toLocaleDateString('pt-BR') : 'Data Indefinida'}</p>
+
+                {/* Área da IA */}
+                <div className="mt-6 pt-4 border-t border-slate-800/50">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Chance de Sucesso (IA)</span>
+                    <span className="text-sm font-mono font-bold text-blue-400">{missao.chance}%</span>
+                  </div>
+                  <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                    <div 
+                      className={`h-full transition-all duration-1000 ${
+                        missao.chance > 80 ? 'bg-blue-500' : missao.chance > 50 ? 'bg-yellow-500' : 'bg-red-500'
+                      }`}
+                      style={{ width: `${missao.chance}%` }}
+                    ></div>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
+
+        {/* Mensagem caso não encontre nada, só mostra se já carregou e não deu erro */}
+        {!isLoading && !erroConsulta && missoesFiltradas.length === 0 && (
+          <div className="text-center py-20">
+            <p className="text-slate-500 italic">Nenhuma missão encontrada com esses filtros no banco de dados.</p>
           </div>
         )}
 

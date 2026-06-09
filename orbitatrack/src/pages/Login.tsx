@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const navigate = useNavigate();
+  
   // Estado para alternar entre tela de Login (false) e Cadastro (true)
   const [isRegister, setIsRegister] = useState(false);
 
@@ -28,24 +30,40 @@ const Login = () => {
 
     try {
       if (isRegister) {
-        // =====================================================================
-        // 🔙 BACK-END DEV (CADASTRO): Insira o fetch/axios de Registro aqui!
-        // Exemplo: POST para 'http://localhost:8080/api/auth/register'
-        // Enviando: { name, email, password }
-        // =====================================================================
-        console.log("Enviando para o Back-end (CADASTRO):", { name, email, password });
-        alert("Dados de Cadastro enviados! Conecte sua API em Java aqui.");
+        // --- CONEXÃO COM O JAVA (CADASTRO) ---
+        const response = await fetch('https://projeto-espacial-6.onrender.com/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: name, email: email, password: password })
+        });
+
+        if (response.ok) {
+          alert("Conta criada com sucesso! Faça login para continuar.");
+          setIsRegister(false); // Volta para a tela de login
+          setPassword('');
+          setConfirmPassword('');
+        } else {
+          setErrorMessage("Erro ao criar conta. Verifique os dados.");
+        }
+
       } else {
-        // =====================================================================
-        // 🔙 BACK-END DEV (LOGIN): Insira o fetch/axios de Login aqui!
-        // Exemplo: POST para 'http://localhost:8080/api/auth/login'
-        // Enviando: { email, password }
-        // =====================================================================
-        console.log("Enviando para o Back-end (LOGIN):", { email, password });
-        alert("Dados de Login enviados! Conecte sua API em Java aqui.");
+        // Conexão com o java (login) 
+        const response = await fetch('https://projeto-espacial-6.onrender.com/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email, password: password })
+        });
+
+        if (response.ok) {
+          // alert("Login aprovado!");
+          navigate('/missoes'); // Redireciona para o painel de missões
+        } else {
+          setErrorMessage("Credenciais inválidas. Tente novamente.");
+        }
       }
     } catch (error) {
-      setErrorMessage('Erro na comunicação com o servidor espacial.');
+      console.error(error);
+      setErrorMessage('Erro na comunicação com o servidor espacial (Render).');
     } finally {
       setIsLoading(false);
     }
@@ -74,7 +92,7 @@ const Login = () => {
           )}
 
           <div className="space-y-4">
-            {/*Campo nome,aparece apenas se for no cadastro */}
+            {/* Campo nome, aparece apenas se for no cadastro */}
             {isRegister && (
               <div>
                 <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Nome Completo</label>
@@ -126,7 +144,7 @@ const Login = () => {
               </div>
             </div>
 
-            {/*Campo de confirmar senha,aparece apenas se for no cadastro */}
+            {/* Campo de confirmar senha, aparece apenas se for no cadastro */}
             {isRegister && (
               <div>
                 <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Confirmar Senha</label>

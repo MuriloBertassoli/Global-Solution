@@ -1,73 +1,56 @@
-# React + TypeScript + Vite
+# 🌌 Cosmohub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Toda missão para o cosmos, rastreada em um só lugar.
 
-Currently, two official plugins are available:
+O **Cosmohub** é uma plataforma inteligente e centralizada projetada para a Nova Economia Espacial. O sistema rastreia e consolida dados de missões espaciais reais das maiores agências do mundo (NASA, SpaceX, ESA e Roscosmos), oferecendo um painel de controle interativo com análises preditivas baseadas em Inteligência Artificial.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🎓 Equipe (Global Solution)
+* **Murilo Bertassoli Massini** - RM: 567383
+* **Giovanni Barbosa Sacristan** - RM: 567384
+* **Gabriel Deott Zanatta** - RM: 567258
+* **Gianluca Kenis de Araujo** - RM: 566765
+* **Ruan Ribeiro Guimaraes** - RM: 567693
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+🎥 **[Clique aqui para assistir ao nosso Pitch no YouTube] (COLOQUE_O_LINK_AQUI)**
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🌍 Impacto e ODS
+Este projeto foi desenvolvido como solução para a **Global Solution**, alinhando-se diretamente aos Objetivos de Desenvolvimento Sustentável (ODS) da ONU, em especial o **ODS 9 (Indústria, Inovação e Infraestrutura)**, democratizando o acesso a dados complexos da economia espacial e fomentando a pesquisa acadêmica através de análises de IA.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🚀 Funcionalidades Principais
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+* **Dashboard de Missões:** Galeria completa de lançamentos com status, data e informações do veículo espacial.
+* **Detalhes por Missão:** Telas dinâmicas individuais contendo telemetria básica, relatórios analíticos e galeria de imagens exclusivas.
+* **Filtros e Buscas Dinâmicas:** Navegação fluida para buscar missões por nome, foguete ou filtragem direta por Agência Operadora.
+* **Análise Preditiva (IA):** Exibição de "Chance de Sucesso" gerada por Inteligência Artificial (utilizando dados e modelos do Kaggle).
+* **Autenticação:** Sistema de login e cadastro integrado via API.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🛠️ Tecnologias Utilizadas
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Este repositório contém a aplicação **Front-end**, construída com foco em performance e interface de usuário moderna.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+* **React (Vite):** Biblioteca principal para construção da interface.
+* **TypeScript:** Adição de tipagem estática para um código mais seguro e escalável.
+* **Tailwind CSS:** Framework utilitário para estilização rápida, responsiva e com suporte a *Dark Mode*.
+* **React Router DOM:** Gerenciamento de rotas e navegação dinâmica (SPA).
+* **Fetch API:** Integração assíncrona com o servidor Back-end RESTful.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## ⚙️ Arquitetura e Integração (Back-end)
+
+O Cosmohub opera de forma totalmente integrada (via requisições JSON) a uma API **Java/Spring Boot** hospedada na nuvem (Render). 
+
+* **URL da API (Produção):** `https://projeto-espacial-6.onrender.com`
+* **Repositório do Back-end:** [Link para o GitHub do Back-end] (COLOQUE_O_LINK_DO_SEU_AMIGO_AQUI)
+
+O Back-end é responsável por fornecer a listagem do banco de dados relacional, processar a autenticação de usuários e aplicar as políticas de CORS para consumo seguro do Front-end.
+
+## 💻 Como rodar o projeto localmente
+
+Siga os passos abaixo para testar a interface em sua máquina:
+
+1. **Clone o repositório:**
+   ```bash
+   git clone [https://github.com/MuriloBertassoli/Global-Solution.git](https://github.com/MuriloBertassoli/Global-Solution.git)

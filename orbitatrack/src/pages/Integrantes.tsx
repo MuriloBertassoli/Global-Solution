@@ -71,7 +71,7 @@ const Integrantes = () => {
     {
       id: 5,
       cargo: "Tripulação",
-      nome: "Nome do Integrante 5",
+      nome: "Gabriel Deotti Zanatta",
       rm: "RM 567258",
       turma: "1TDSPA",
       foto: fotoGabriel,
