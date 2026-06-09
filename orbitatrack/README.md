@@ -8,7 +8,7 @@ O **Cosmohub** é uma plataforma inteligente e centralizada projetada para a Nov
 
 ## 🎓 Equipe (Global Solution)
 * **Murilo Bertassoli Massini** - RM: 567383
-* **Giovanni Barbosa Sacristan** - RM: 567384
+* **Giovanni Barbosa Sacristan** - RM: 567548
 * **Gabriel Deott Zanatta** - RM: 567258
 * **Gianluca Kenis de Araujo** - RM: 566765
 * **Ruan Ribeiro Guimaraes** - RM: 567693

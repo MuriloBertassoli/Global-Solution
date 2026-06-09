@@ -30,8 +30,8 @@ const Login = () => {
 
     try {
       if (isRegister) {
-        // --- CONEXÃO COM O JAVA (CADASTRO) ---
-        const response = await fetch('https://projeto-espacial-6.onrender.com/register', {
+        //Conexao com o java(CADASTRO)
+        const response = await fetch('https://projeto-espacial-6.onrender.com/usuarios', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ name: name, email: email, password: password })
@@ -47,8 +47,8 @@ const Login = () => {
         }
 
       } else {
-        // Conexão com o java (login) 
-        const response = await fetch('https://projeto-espacial-6.onrender.com/login', {
+        // Conexao com o java (LOGIN) 
+        const response = await fetch('https://projeto-espacial-6.onrender.com/usuarios/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: email, password: password })
